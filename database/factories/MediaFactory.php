@@ -57,10 +57,8 @@ class MediaFactory extends Factory
     {
         if (str_contains($url, 'gtv-videos-bucket')) {
             return 'video';
-        } elseif (str_contains($url, 'images.unsplash.com')) {
+        } elseif (str_contains($url, 'unsplash.com')) {
             return 'image';
-        } else {
-            return 'unknown';
         }
     }
 

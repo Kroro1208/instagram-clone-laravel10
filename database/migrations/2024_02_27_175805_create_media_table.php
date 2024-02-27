@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->morphs('mediable');
             $table->string('url');
-            $table->enum('mime', allowed: ['image', 'video']);
+            $table->enum('mime', allowed: ['image', 'video',]);
             $table->timestamps();
         });
     }
