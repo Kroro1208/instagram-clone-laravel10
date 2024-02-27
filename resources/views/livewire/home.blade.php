@@ -36,6 +36,13 @@
                         @endfor
                 </ul>
             </section>
+
+            {{--posts--}}
+            <section class="mt5 space-y-4 p-2">
+                <livewire:post.item />
+                <livewire:post.item />
+                <livewire:post.item />
+            </section>
         </aside>
 
 
