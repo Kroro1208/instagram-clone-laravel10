@@ -39,9 +39,13 @@
 
             {{--posts--}}
             <section class="mt5 space-y-4 p-2">
-                <livewire:post.item />
-                <livewire:post.item />
-                <livewire:post.item />
+                @if($posts)
+                @forEach($posts->take(10) as $post)
+                <livewire:post.item wire:key="post-{{$post->id}}" :post="$post" />
+                @endforEach
+                @else
+                <p class="font-bold flex justify-center">投稿がありません</p>
+                @endif
             </section>
         </aside>
 

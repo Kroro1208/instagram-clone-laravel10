@@ -5,7 +5,7 @@
         <x-avatar src="http://source.unsplash.com/500x500?face" class="h-9 w-9" />
         <div class="grid grid-cols-7 w-full gap-2">
             <div class="col-span-5">
-                <h5 class="font-semibold truncate text-sm">{{fake()->name}}</h5>
+                <h5 class="font-semibold truncate text-sm">{{$post->user->name}}</h5>
             </div>
             <div class="col-span-2 flex text-right justify-end">
                 <button class="text-gray-500 ml-auto">
@@ -34,16 +34,26 @@
                 },
             });" class="swiper h-[500px] border bg-white">
                 <!-- Additional required wrapper -->
-                <div x-cloak class="swiper-wrapper">
+                <ul x-cloak class="swiper-wrapper">
                     <!-- Slides -->
-                    <div class="swiper-slide"><x-video /></div>
-                    <div class="swiper-slide"><img src="https://images.pexels.com/photos/13010254/pexels-photo-13010254.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" class="h-[500px] w-full block object-scale-down"></div>
-                    <div class="swiper-slide"><img src="https://images.pexels.com/photos/111085/pexels-photo-111085.jpeg?auto=compress&cs=tinysrgb&w=600" alt="" class="h-[500px] w-full block object-scale-down"></div>
-
-                </div>
+                    @foreach($post->media as $file)
+                    <li class="swiper-slide">
+                        @switch($file->mime)
+                        @case('video')
+                        <x-video source="{{$file->url}}" />
+                        @break
+                        @case('image')
+                        <img src="{{$file->url}}" class="h-[500px] w-full block object-scale-down">
+                        @break
+                        @default
+                        @endswitch
+                    </li>
+                    @endforEach
+                </ul>
                 <!-- If we need pagination -->
                 <div class="swiper-pagination"></div>
 
+                @if(count($post->media)>1)
                 <!-- If we need navigation buttons -->
                 <div class="swiper-button-prev absolute top-1/2 z-10 p-2">
                     <div class="bg-white/95 border p-1 rounded-full text-gray-900">
@@ -60,6 +70,8 @@
                     </div>
                 </div>
                 <!-- If we need scrollbar -->
+                @endif
+
                 <div class="swiper-scrollbar"></div>
             </div>
         </div>
@@ -96,7 +108,7 @@
 
         {{--name and comment--}}
         <div class="flex text-sm gap-2 font-medium">
-            <p><strong class="font-bold">{{fake()->name}}</strong>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Modi fugiat exercitationem enim quisquam ipsam! Id architecto modi vitae, sint, porro maiores voluptatibus ea incidunt labore iure ut veniam, eum itaque.</p>
+            <p><strong class="font-bold">{{$post->user->name}}</strong>{{$post->description}}</p>
         </div>
 
         {{--view post model--}}
