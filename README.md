@@ -1,5 +1,8 @@
+複数メディアのアップロード設定
+![Media 設定](/createMedia.gif)
+
 Modal 設定
-![MOdal 設定](/createModal.gif)
+![Modal 設定](/createModal.gif)
 
 SwiperJS 設定
 ![SwiperJS 設定](/swiper.gif)
