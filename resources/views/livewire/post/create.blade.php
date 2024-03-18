@@ -8,7 +8,7 @@
             <div class="text-lg font-bold">
                 投稿を作成
             </div>
-            <button class="text-blue-500 font-bold">
+            <button @disabled(count($media)==0) wire:loading.attr="disabled" wire:click="submit" class="text-blue-500 font-bold">
                 シェアする
             </button>
         </div>
@@ -49,10 +49,10 @@
                 <h5 class="font-bold">{{fake()->name()}}</h5>
             </div>
             <div>
-                <textarea placeholder="説明を追加する" class="border-0 focus:border-0 px-0 w-full rounded-lg bg-white h-32 focus:outline-none focus:ring-0" name="" id="" cols="30" rows="10"></textarea>
+                <textarea wire:model="description" placeholder="説明を追加する" class="border-0 focus:border-0 px-0 w-full rounded-lg bg-white h-32 focus:outline-none focus:ring-0" name="" id="" cols="30" rows="10"></textarea>
             </div>
             <div class="w-full items-center">
-                <input type="text" placeholder="場所を追加" class="border-0 focus:border-0 px-0 w-full rounded-lg bg-white focus:outline-none focus:ring-0">
+                <input wire:model:="location" type="text" placeholder="場所を追加" class="border-0 focus:border-0 px-0 w-full rounded-lg bg-white focus:outline-none focus:ring-0">
             </div>
             <div class="">
                 <h6 class="text-gray-500 font-medium text-base">詳細な設定</h6>
@@ -61,7 +61,7 @@
                         <div class="flex item-center gap-3 justify-between">
                             <p>「いいね！」と「閲覧数」を非表示にする</p>
                             <label class="inline-flex items-center mb-5 cursor-pointer">
-                                <input type="checkbox" value="" class="sr-only peer">
+                                <input wire:model="hide_like_view" type="checkbox" value="" class="sr-only peer">
                                 <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
                             </label>
                         </div>
@@ -70,7 +70,7 @@
                         <div class="flex item-center gap-3 justify-between">
                             <p>コメントを非表示にする</p>
                             <label class="inline-flex items-center mb-5 cursor-pointer">
-                                <input type="checkbox" value="" class="sr-only peer">
+                                <input wire:model="allow_commenting" type="checkbox" value="" class="sr-only peer">
                                 <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
                             </label>
                         </div>
