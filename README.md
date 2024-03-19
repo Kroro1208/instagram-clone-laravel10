@@ -1,4 +1,9 @@
+コメントモーダル開いて閉じた時のURLの挙動設定
+モーダル外をクリックしてもURLをホームに戻す
+![Modal 設定](/commentModal.gif)
+
 複数メディアのアップロード設定
+※若干時間かかる
 ![Media 設定](/createMedia.gif)
 
 Modal 設定
