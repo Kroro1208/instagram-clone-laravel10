@@ -31,10 +31,11 @@ class Create extends ModalComponent
 
     function submit()
     {
+        // dd($this->media);
         // validation
         $this->validate([
             'media' => 'required|array|min:1',
-            'media.*' => 'required|file|mimes:png,jpg,mp4,jpeg,mov|max:10000',
+            'media.*' => 'required|file|mimes:png,jpg,mp4,jpeg,mov|max:50288',
             'description' => 'nullable',
             'allow_commenting' => 'boolean',
             'hide_like_view' => 'boolean'
@@ -42,7 +43,6 @@ class Create extends ModalComponent
 
         //  アップロードされたファイルのタイプ(real or post)を返す関数
         $type = $this->getPostType($this->media);
-
 
         // create post
         $post = Post::create([
@@ -72,6 +72,7 @@ class Create extends ModalComponent
                 'mediable_type' => Post::class
             ]);
         }
+
         $this->reset();
         $this->dispatch('closeModal');
 
@@ -79,7 +80,7 @@ class Create extends ModalComponent
         $this->dispatch('post-created', $post->id);
     }
 
-    function getMime($media)
+    private function getMime($media)
     {
         if (str()->contains($media->getMimeType(), 'video')) {
             return 'video';
@@ -88,7 +89,7 @@ class Create extends ModalComponent
         }
     }
 
-    function getPostType($media): string
+    private function getPostType($media): string
     {
         // アップロードされたファイルが1つかつvideoであれば
         if (count($media) == 1 && str()->contains($media[0]->getMimeType(), 'video')) {
