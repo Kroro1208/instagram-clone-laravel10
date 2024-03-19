@@ -32,7 +32,7 @@ class Create extends ModalComponent
     function submit()
     {
         // validation
-        $this->validate(rules: [
+        $this->validate([
             'media' => 'required|array|min:1',
             'media.*' => 'required|file|mimes:png,jpg,mp4,jpeg,mov|max:10000',
             'description' => 'nullable',
@@ -43,6 +43,7 @@ class Create extends ModalComponent
         //  アップロードされたファイルのタイプ(real or post)を返す関数
         $type = $this->getPostType($this->media);
 
+
         // create post
         $post = Post::create([
             'user_id' => auth()->user()->id,
@@ -52,6 +53,7 @@ class Create extends ModalComponent
             'hide_like_view' => $this->hide_like_view,
             'type' => $type
         ]);
+
 
         //add media
         foreach ($this->media as $key => $media) {

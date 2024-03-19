@@ -39,6 +39,9 @@ class Modal extends ModalComponent
                     <button wire:click="$dispatch('closeModal')" type="button" class="xl font-bold">X</button>
                 </div>
             </header>
+
+            <livewire:post.view.item :post="$this->post" />
+            
         </main>
         BLADE;
     }
