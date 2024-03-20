@@ -16,7 +16,7 @@ class Modal extends ModalComponent
         return '5xl';
     }
 
-    // scapeを押したときにモーダルウィンドウを自動的に閉じるかどうかを制御
+    // escapeを押したときにモーダルウィンドウを自動的に閉じるかどうかを制御
     public static function closeModalOnEscape(): bool
     {
         return false;
