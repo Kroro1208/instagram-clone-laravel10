@@ -1,4 +1,24 @@
-<div class="w-full h-full">
+<div
+x-data="{
+    {{-- @entangle()で一方の状態が変更されたときに、もう一方の状態も自動的に更新される --}}
+    canLoadMore:@entangle('canLoadMore')
+}"
+
+@scroll.window.trottle="
+scrollTop= window.scrollY || document.documentElement.scrollTop;
+divHeight= window.innerHeight || document.documentElement.clientHeight;
+scrollHeight = document.documentElement.scrollHeight;
+
+isScrolled= scrollTop + divHeight >= scrollHeight-1;
+
+{{--Check if user can load more--}}
+if(isScrolled && canLoadMore){
+    console.log('loadMoreを実行');
+    @this.loadMore();
+}
+"
+class="w-full h-full"
+>
     {{--Header--}}
     <header class="md:hidden sticky top-0 bg-white">
         <div class="grid grid-cols-12 gap-2 items-center">
@@ -40,7 +60,7 @@
             {{--posts--}}
             <section class="mt5 space-y-4 p-2">
                 @if($posts)
-                @forEach($posts->take(10) as $post)
+                @forEach($posts as $post)
                 <livewire:post.item wire:key="post-{{$post->id}}" :post="$post" />
                 @endforEach
                 @else
@@ -67,7 +87,7 @@
                                 <h5 class="font-semibold truncate text-sm">{{fake()->name}}</h5>
                                 <p class="text-xm truncate">Followed by {{fake()->name}}</p>
                             </div>
-                            <div class="col-span-2 flex text-right justify-end">
+                            <div class="col-span-2 flex mx-auto">
                                 <button class="font-bold text-blue-500 ml-auto text-sm">フォロー</button>
                             </div>
                         </div>

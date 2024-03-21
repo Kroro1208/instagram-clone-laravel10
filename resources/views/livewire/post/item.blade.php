@@ -112,7 +112,7 @@
         </div>
 
         {{--view post model--}}
-        <button onclick="Livewire.dispatch('openModal', {component:'post.view.modal', arguments:{'post':{{$post->id}}}})" class="text-gray-500/90 text-sm font-medium">コメント555件をすべて見る</button>
+        <button onclick="Livewire.dispatch('openModal', {component:'post.view.modal', arguments:{'post':{{$post->id}}}})" class="text-gray-500/90 text-sm font-medium">{{$post->comments->count()}}件のコメントを見る</button>
 
         {{--leave comment--}}
         <form x-data="{inputText:''}" class="grid grid-cols-12 items-center w-full">
