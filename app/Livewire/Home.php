@@ -29,7 +29,8 @@ class Home extends Component
     function mount()
     {
         // mountメソッドは、コンポーネントが初期化される時点で実行される
-        $this->posts = Post::latest()->get();
+        $this->posts = Post::whereHas('comments')->with('comments')->latest()->get();
+        dd($this->posts);
     }
 
     public function render()

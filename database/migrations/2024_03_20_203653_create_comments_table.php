@@ -15,12 +15,13 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             // コメントの階層構造を実現するために、親コメントのIDを参照するカラムです。このフィールドにより、コメントが他のコメントに対する返信であることを示すことができます。
-            $table->unsignedBigInteger('parent_id');
+            $table->unsignedBigInteger('parent_id')->nullable();
 
             // parent_idカラムを、同じcommentsテーブルのidカラムに対する外部キーとして設定し、親コメントが削除された場合にその子コメントも削除される
-            $table->foreignId('parent_id')->references('id')->on('comments')->cascadeOnDelete();
+            // ※foreign()は、既に存在するカラムに外部キー制約を追加するために使用されます
+            $table->foreign('parent_id')->references('id')->on('comments')->cascadeOnDelete();
             $table->integer('commentable_id')->nullable()->unsigned(); // コメントが関連付けられる対象（例: 記事や画像など）のID
-            $table->integer('commentable_type')->nullable(); // これもポリモーフィック関連に使用され、commentable_idと組み合わせて、コメントがどのモデルタイプ（例: App\Models\ArticleやApp\Models\Imageなど）に関連付けられているかを示す。
+            $table->string('commentable_type')->nullable(); // これもポリモーフィック関連に使用され、commentable_idと組み合わせて、コメントがどのモデルタイプ（例: App\Models\ArticleやApp\Models\Imageなど）に関連付けられているかを示す。
 
             $table->mediumText('body')->nullable(); // コメントの本文を保存するためのカラム
             $table->softDeletes();
