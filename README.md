@@ -1,3 +1,6 @@
+スクロール時のインクリメント表示
+![Modal 設定](/postIncrement.gif)
+
 コメントモーダル開いて閉じた時のURLの挙動設定
 モーダル外をクリックしてもURLをホームに戻す
 ![Modal 設定](/commentModal.gif)
