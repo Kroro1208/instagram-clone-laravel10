@@ -40,9 +40,6 @@ class="w-full h-full"
         </div>
     </header>
 
-
-
-
     {{--Main--}}
     <main class="grid lg:grid-cols-12 gap-8 md:mt-10">
         <aside class="lg:col-span-8 overflow-hidden">
