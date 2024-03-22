@@ -1,3 +1,6 @@
+投稿詳細画面で追加のコメントができるようにした
+![Modal 設定](/addComment.gif)
+
 スクロール時のインクリメント表示
 ![Modal 設定](/postIncrement.gif)
 
