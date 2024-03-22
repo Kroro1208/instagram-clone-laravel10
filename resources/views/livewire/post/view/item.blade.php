@@ -37,7 +37,6 @@
             </div>
         </header>
         <main>
-
             @if ($comments)
                 @foreach($comments as $comment)
                     <section class="flex flex-col gap-2">
@@ -92,11 +91,16 @@
             <button class="text-gray-500/90 text-sm font-medium">{{$post->comments->count()}}件のコメントを見る</button>
     
             {{--leave comment--}}
-            <form x-data="{inputText:''}" class="grid grid-cols-12 items-center w-full">
+            <form
+            wire:key='{{time()}}'
+            x-data="{body:@entangle('body')}"
+            class="grid grid-cols-12 items-center w-full"
+            @submit.prevent="$wire.addComment()"
+            >
                 @csrf
-                <input x-model="inputText" type="text" placeholder="コメントを追加..." class="border-0 col-span-10 placeholder:text-sm outline-none focus:outline-none px-0 rounded-lg hover:ring-0 focus:ring-0">
+                <input x-model="body" type="text" placeholder="コメントを追加..." class="border-0 col-span-10 placeholder:text-sm outline-none focus:outline-none px-0 rounded-lg hover:ring-0 focus:ring-0">
                 <div class="col-span-1 ml-auto flex justify-end text-right">
-                    <button x-cloak x-show="inputText.length>0" class="text-sm font-semibold flex justify-end text-blue-500">
+                    <button type="submit" x-cloak x-show="body && body.length >0" class="text-sm font-semibold flex justify-end text-blue-500">
                         投稿する
                     </button>
                 </div>
