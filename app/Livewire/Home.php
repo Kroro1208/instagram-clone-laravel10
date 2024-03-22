@@ -31,7 +31,6 @@ class Home extends Component
 
     // 既にデータベースに保存されている投稿（Postオブジェクト）を特定のIDに基づいて検索し、
     // その投稿を現在の投稿リストの先頭に追加する
-
     function postCreates($id)
     {
         $post = Post::find($id);
