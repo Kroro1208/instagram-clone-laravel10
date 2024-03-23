@@ -5,7 +5,6 @@
         <div class="col-span-6 flex flex-wrap text-sm">
             <p>
                 <span class="font-bold text-sm mr-3">{{$reply->user->name}}</span>
-                <span class="font-bold">@ {{$reply->parent->user->name}}</span>
                 {{$reply->body}}
             </p>
         </div>
@@ -21,9 +20,9 @@
 
         {{-- footer --}}
         <div class="col-span-7 flex gap-2 text-sm items-centr text-gray-700">
-            <span>{{$comment->created_at->diffForHumans()}}</span>
+            <span>{{$reply->created_at->diffForHumans()}}</span>
             <span class="font-bold">125いいね</span>
-            <span class="font-semibold">リプライ</span>
+            <button wire:click="setParent({{$reply->id}})" class="font-semibold hover:cursor-pointer">リプライ</button>
         </div>
     </div>
 </div>

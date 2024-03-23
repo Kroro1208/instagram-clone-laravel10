@@ -22,7 +22,7 @@
         <div class="col-span-7 flex gap-2 text-sm items-centr text-gray-700">
             <span>{{$comment->created_at->diffForHumans()}}</span>
             <span class="font-bold">125いいね</span>
-            <span class="font-semibold">リプライ</span>
+            <button wire:click="setParent({{$comment->id}})" class="font-semibold hover: cursor-pointer">リプライ</button>
 
         </div>
     </div>
